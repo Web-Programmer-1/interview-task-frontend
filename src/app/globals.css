@@ -1,6 +1,515 @@
+/* ============================================================
+   Arabic Fonts — MUST be first (before @tailwind)
+   ============================================================ */
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/* KFGQPC Uthmanic Script HAFS (Qurancomplex.gov.sa) */
+@font-face {
+  font-family: 'KFGQPC Uthmanic Script HAFS';
+  src: url('https://fonts.qurancomplex.gov.sa/KFGQPC%20HAFS%20Uthmanic%20Script.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
 
+/* ============================================================
+   Root — Layout Constants (never change per theme)
+   ============================================================ */
+:root {
+  --font-arabic: 'KFGQPC Uthmanic Script HAFS', 'Amiri Quran', serif;
+  --sidebar-width: 60px;
+  --surah-list-width: 280px;
+  --settings-width: 300px;
+}
+
+/* ============================================================
+   DARK THEME (default)
+   ============================================================ */
+[data-theme="dark"], :root {
+  --color-accent:        #428038;
+  --color-accent-light:  #52A046;
+  --color-accent-muted:  rgba(66,128,56,0.15);
+
+  --bg-mesh-1:     rgba(66,128,56,0.35);
+  --bg-mesh-2:     rgba(0,100,255,0.25);
+  --bg-mesh-3:     rgba(150,0,255,0.2);
+  --bg-mesh-4:     rgba(0,0,0,0.5);
+
+  --bg-primary:    #0F1115;
+  --bg-sidebar:    rgba(20,20,24,0.85);
+  --bg-card:       rgba(26,26,31,0.6);
+  --bg-elevated:   rgba(30,30,36,0.7);
+  --bg-hover:      rgba(34,34,40,0.8);
+  --bg-active:     rgba(38,38,48,0.9);
+
+  --border:        rgba(255,255,255,0.07);
+  --border-light:  rgba(255,255,255,0.12);
+
+  --text-primary:  #EAEAEA;
+  --text-secondary:#B0B0BB;
+  --text-muted:    #707078;
+  --text-disabled: #404048;
+  --text-arabic:   #F5F0E8;
+  --text-icon:     #606070;
+
+  --scrollbar-color: #1A1A1F;
+  --scrollbar-thumb: #2A2A30;
+
+  --glass-bg:      rgba(20,20,24,0.72);
+  --glass-border:  rgba(255,255,255,0.08);
+}
+
+/* ============================================================
+   LIGHT THEME
+   ============================================================ */
+[data-theme="light"] {
+  --color-accent:        #2E6B24;
+  --color-accent-light:  #3A8B2E;
+  --color-accent-muted:  rgba(46,107,36,0.1);
+
+  --bg-mesh-1:     rgba(46,107,36,0.2);
+  --bg-mesh-2:     rgba(0,150,255,0.18);
+  --bg-mesh-3:     rgba(255,200,0,0.15);
+  --bg-mesh-4:     rgba(255,255,255,0.8);
+
+  --bg-primary:    #F0F2F5;
+  --bg-sidebar:    rgba(255,255,255,0.9);
+  --bg-card:       rgba(248,249,251,0.6);
+  --bg-elevated:   rgba(236,238,242,0.7);
+  --bg-hover:      rgba(229,232,237,0.8);
+  --bg-active:     #DDE0E8;
+
+  --border:        rgba(0,0,0,0.08);
+  --border-light:  rgba(0,0,0,0.15);
+
+  --text-primary:  #111318;
+  --text-secondary:#3A3D4A;
+  --text-muted:    #6B6E7A;
+  --text-disabled: #A8ABB5;
+  --text-arabic:   #1A1410;
+  --text-icon:     #7A7D8A;
+
+  --scrollbar-color: #ECEEF2;
+  --scrollbar-thumb: #C8CBD5;
+
+  --glass-bg:      rgba(255,255,255,0.80);
+  --glass-border:  rgba(0,0,0,0.08);
+}
+
+/* ============================================================
+   SEPIA THEME
+   ============================================================ */
+[data-theme="sepia"] {
+  --color-accent:        #8B5E3C;
+  --color-accent-light:  #A67450;
+  --color-accent-muted:  rgba(139,94,60,0.15);
+
+  --bg-mesh-1:     rgba(139,94,60,0.3);
+  --bg-mesh-2:     rgba(255,150,0,0.25);
+  --bg-mesh-3:     rgba(200,100,0,0.2);
+  --bg-mesh-4:     rgba(244,236,216,0.7);
+
+  --bg-primary:    #F4ECD8;
+  --bg-sidebar:    rgba(237,227,201,0.9);
+  --bg-card:       rgba(249,243,229,0.6);
+  --bg-elevated:   rgba(232,220,196,0.7);
+  --bg-hover:      rgba(224,212,184,0.8);
+  --bg-active:     #D8CCAC;
+
+  --border:        rgba(100,70,40,0.12);
+  --border-light:  rgba(100,70,40,0.22);
+
+  --text-primary:  #2C1A0E;
+  --text-secondary:#5C3A22;
+  --text-muted:    #8B6048;
+  --text-disabled: #C0A080;
+  --text-arabic:   #1A0E06;
+  --text-icon:     #9A7A60;
+
+  --scrollbar-color: #E8DCC4;
+  --scrollbar-thumb: #C8A888;
+
+  --glass-bg:      rgba(244,236,216,0.82);
+  --glass-border:  rgba(100,70,40,0.15);
+}
+
+/* ============================================================
+   GREEN THEME
+   ============================================================ */
+[data-theme="green"] {
+  --color-accent:        #4CAF50;
+  --color-accent-light:  #66BB6A;
+  --color-accent-muted:  rgba(76,175,80,0.15);
+
+  --bg-mesh-1:     rgba(76,175,80,0.4);
+  --bg-mesh-2:     rgba(0,255,200,0.25);
+  --bg-mesh-3:     rgba(0,100,255,0.2);
+  --bg-mesh-4:     rgba(7,26,11,0.6);
+
+  --bg-primary:    #071A0B;
+  --bg-sidebar:    rgba(12,32,16,0.9);
+  --bg-card:       rgba(16,38,20,0.6);
+  --bg-elevated:   rgba(20,44,24,0.7);
+  --bg-hover:      rgba(26,52,30,0.8);
+  --bg-active:     #1E3C22;
+
+  --border:        rgba(76,175,80,0.12);
+  --border-light:  rgba(76,175,80,0.22);
+
+  --text-primary:  #D6F5D8;
+  --text-secondary:#A0D8A4;
+  --text-muted:    #5E9062;
+  --text-disabled: #2E5A32;
+  --text-arabic:   #E8FFE9;
+  --text-icon:     #4E7A52;
+
+  --scrollbar-color: #0C2010;
+  --scrollbar-thumb: #1E4C22;
+
+  --glass-bg:      rgba(10,30,12,0.75);
+  --glass-border:  rgba(76,175,80,0.15);
+}
+
+/* ============================================================
+   RED THEME
+   ============================================================ */
+[data-theme="red"] {
+  --color-accent:        #C0392B;
+  --color-accent-light:  #E74C3C;
+  --color-accent-muted:  rgba(192,57,43,0.15);
+
+  --bg-mesh-1:     rgba(192,57,43,0.35);
+  --bg-mesh-2:     rgba(255,100,0,0.3);
+  --bg-mesh-3:     rgba(150,0,255,0.25);
+  --bg-mesh-4:     rgba(26,8,8,0.6);
+
+  --bg-primary:    #1A0808;
+  --bg-sidebar:    rgba(32,12,12,0.9);
+  --bg-card:       rgba(38,16,16,0.6);
+  --bg-elevated:   rgba(44,20,20,0.7);
+  --bg-hover:      rgba(52,24,24,0.8);
+  --bg-active:     #3C1C1C;
+
+  --border:        rgba(192,57,43,0.12);
+  --border-light:  rgba(192,57,43,0.22);
+
+  --text-primary:  #F5D8D8;
+  --text-secondary:#D8A0A0;
+  --text-muted:    #905E5E;
+  --text-disabled: #5A2E2E;
+  --text-arabic:   #FFE8E8;
+  --text-icon:     #7A4A4A;
+
+  --scrollbar-color: #200C0C;
+  --scrollbar-thumb: #4C1E1E;
+
+  --glass-bg:      rgba(28,10,10,0.75);
+  --glass-border:  rgba(192,57,43,0.15);
+}
+
+
+
+
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@keyframes mesh-move {
+  0% { background-position: 0% 50%, 100% 50%, 0% 0%, 50% 50%; }
+  50% { background-position: 100% 50%, 0% 50%, 100% 100%, 50% 50%; }
+  100% { background-position: 0% 50%, 100% 50%, 0% 0%, 50% 50%; }
+}
+
+body {
+  background-color: var(--bg-primary);
+  background-image: 
+    radial-gradient(circle at 0% 100%, var(--bg-mesh-1) 0%, transparent 60%),
+    radial-gradient(circle at 100% 100%, var(--bg-mesh-2) 0%, transparent 60%),
+    radial-gradient(circle at 0% 0%, var(--bg-mesh-3) 0%, transparent 60%),
+    radial-gradient(circle at 50% 50%, var(--bg-mesh-4) 0%, transparent 100%);
+  background-size: 200% 200%;
+  animation: mesh-move 20s ease infinite;
+  color: var(--text-primary);
+  font-family: 'Inter', system-ui, sans-serif;
+  overflow: hidden; /* prevent body scroll — layout handles scroll */
+  height: 100vh;
+  transition: background 0.8s cubic-bezier(0.4, 0, 0.2, 1), color 0.3s ease;
+}
+
+/* ============================================================
+   Custom Scrollbar (Dark Theme)
+   ============================================================ */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--scrollbar-color);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--border-light);
+}
+
+/* ============================================================
+   Arabic Text Base Styles
+   ============================================================ */
+.arabic-text {
+  font-family: var(--font-arabic);
+  direction: rtl;
+  text-align: right;
+  line-height: 2.2;
+  letter-spacing: 0;
+  unicode-bidi: embed;
+}
+
+.arabic-text-kfgq {
+  font-family: 'KFGQPC Uthmanic Script HAFS', serif;
+}
+
+.arabic-text-amiri {
+  font-family: 'Amiri Quran', 'Amiri', serif;
+}
+
+.arabic-text-scheherazade {
+  font-family: 'Scheherazade New', serif;
+}
+
+/* ============================================================
+   Layout Utilities
+   ============================================================ */
+.quran-layout {
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.main-content {
+  flex: 1;
+  overflow-y: auto;
+  height: 100vh;
+}
+
+/* ============================================================
+   Search highlight
+   ============================================================ */
+mark {
+  background-color: rgba(66, 128, 56, 0.4);
+  color: #7CDB6A;
+  padding: 0 2px;
+  border-radius: 2px;
+}
+
+/* ============================================================
+   Transition Helpers
+   ============================================================ */
+.sidebar-transition {
+  transition: width 0.3s ease, transform 0.3s ease, opacity 0.3s ease;
+}
+
+/* ============================================================
+   Verse Number Badge
+   ============================================================ */
+.verse-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1.5px solid #428038;
+  color: #428038;
+  font-size: 0.75rem;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+/* ============================================================
+   Active state for sidebar items
+   ============================================================ */
+.sidebar-item-active {
+  background-color: rgba(66, 128, 56, 0.08);
+  border-left: 2px solid #428038;
+}
+
+/* ============================================================
+   Icon Sidebar Buttons
+   ============================================================ */
+.icon-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  color: var(--text-icon);
+  transition: background-color 0.15s ease, color 0.15s ease;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  outline: none;
+}
+
+.icon-btn:hover {
+  background-color: var(--bg-hover);
+  color: var(--text-primary);
+}
+
+.icon-btn-active {
+  background-color: var(--color-accent-muted);
+  color: var(--color-accent);
+}
+
+.icon-btn-sm {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  color: var(--text-icon);
+  transition: background-color 0.15s ease, color 0.15s ease;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  outline: none;
+}
+
+.icon-btn-sm:hover {
+  background-color: var(--bg-hover);
+  color: var(--text-primary);
+}
+
+/* ============================================================
+   Mobile Nav Button
+   ============================================================ */
+.mobile-nav-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  flex: 1;
+  padding: 6px 4px;
+  color: var(--text-icon);
+  transition: color 0.15s ease;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.mobile-nav-btn:hover {
+  color: var(--text-primary);
+}
+
+/* ============================================================
+   Surah card hover actions (hidden by default)
+   ============================================================ */
+.ayah-actions {
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.ayah-card:hover .ayah-actions {
+  opacity: 1;
+}
+
+/* ============================================================
+   Wishlist Card Animations
+   ============================================================ */
+@keyframes fadeSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.wishlist-card {
+  animation: fadeSlideIn 0.4s ease-out both;
+}
+
+.wishlist-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+/* ============================================================
+   Custom Scrollbar
+   ============================================================ */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 5px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: var(--border-light);
+  border-radius: 10px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}
+
+/* ============================================================
+   Animations
+   ============================================================ */
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.3s ease-out forwards;
+}
+
+@keyframes slide-up {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
+}
+
+.animate-slide-up {
+  animation: slide-up 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* ============================================================
+   Ayah Action Button Animations
+   ============================================================ */
+@keyframes breath {
+  0%, 100% { transform: scale(1); opacity: 0.8; }
+  50% { transform: scale(1.05); opacity: 1; }
+}
+
+.animate-breath {
+  animation: breath 3s ease-in-out infinite;
+}
+
+@keyframes pulse-soft {
+  0% { box-shadow: 0 0 0 0 rgba(66, 128, 56, 0.4); }
+  70% { box-shadow: 0 0 0 10px rgba(66, 128, 56, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(66, 128, 56, 0); }
+}
+
+.animate-pulse-soft {
+  animation: pulse-soft 2s infinite;
+}

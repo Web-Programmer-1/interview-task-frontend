@@ -51,3 +51,6 @@ logs
 Thumbs.db
 # Local Netlify folder
 .netlify
+
+# Backend folder
+quran-interview-backend/

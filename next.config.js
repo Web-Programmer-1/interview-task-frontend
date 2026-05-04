@@ -1,12 +1,24 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  output: "standalone",
   images: {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "sinzo-backend-files.s3.ap-southeast-2.amazonaws.com",
+        hostname: "**",
       },
     ],
+  },
+  async headers() {
+    return [
+      {
+        source: "/api/:path*",
+        headers: [
+          { key: "Access-Control-Allow-Origin", value: "*" },
+          { key: "Access-Control-Allow-Methods", value: "GET,OPTIONS" },
+        ],
+      },
+    ];
   },
 };
 
