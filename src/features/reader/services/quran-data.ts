@@ -1,7 +1,7 @@
 // AlQuran.cloud API — free, no API key needed, returns Arabic + Translation together
 export const ALQURAN = "https://api.alquran.cloud/v1";
 // Local Backend for metadata and ayahs
-export const BACKEND_API = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000/api";
+export const BACKEND_API = "https://interview-task-backend-nu.vercel.app/api";
 export const QURAN_COM = BACKEND_API; // Redirect metadata calls to local backend
 
 // ─────────────────────────────────────────────────────────────
