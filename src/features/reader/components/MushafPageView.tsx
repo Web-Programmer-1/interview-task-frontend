@@ -385,7 +385,7 @@ export function MushafPageView({
           <div className="flex items-center justify-center gap-4 md:gap-8 mt-10 pb-8">
             {prevPage !== null ? (
               <Link
-                href={`/reading/page/${prevPage}`}
+                href={`/reading/mushaf/${prevPage}`}
                 className="flex items-center gap-2 px-6 py-2.5 rounded-2xl bg-white/5 border border-white/10 text-sm font-bold text-text-primary hover:bg-accent-green hover:text-white transition-all shadow-lg active:scale-95"
               >
                 <ChevronLeft size={18} />
@@ -395,7 +395,7 @@ export function MushafPageView({
 
             {nextPage !== null ? (
               <Link
-                href={`/reading/page/${nextPage}`}
+                href={`/reading/mushaf/${nextPage}`}
                 className="flex items-center gap-2 px-6 py-2.5 rounded-2xl bg-white/5 border border-white/10 text-sm font-bold text-text-primary hover:bg-accent-green hover:text-white transition-all shadow-lg active:scale-95"
               >
                 <span>Next</span>

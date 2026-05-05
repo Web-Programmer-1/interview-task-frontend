@@ -3,6 +3,8 @@ import { getPageVerses, generatePageParams } from "@/features/reader/services/qu
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
+export const dynamic = "force-dynamic";
+
 interface Props {
   params: Promise<{ pageId: string }>;
 }

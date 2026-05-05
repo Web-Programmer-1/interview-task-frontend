@@ -272,11 +272,11 @@ export function SurahSidebar({ surahs: initialSurahs }: SurahSidebarProps) {
               {Array.from({ length: 604 }, (_, i) => {
                 const p = i + 1;
                 const juzEntry = JUZ_INFO.filter(j => j.pageStart <= p).at(-1);
-                const isActive = pathname === `/reading/page/${p}`;
+                const isActive = pathname === `/reading/mushaf/${p}`;
                 return (
                   <Link
                     key={p}
-                    href={`/reading/page/${p}`}
+                    href={`/reading/mushaf/${p}`}
                     onClick={() => {
                       if (typeof window !== "undefined" && window.innerWidth < 768) {
                         closeSurahSidebar();
@@ -324,7 +324,7 @@ export function SurahSidebar({ surahs: initialSurahs }: SurahSidebarProps) {
               {JUZ_INFO.map((juz) => (
                 <Link
                   key={juz.juz}
-                  href={`/reading/page/${juz.pageStart}`}
+                  href={`/reading/mushaf/${juz.pageStart}`}
                   className="flex items-center gap-3 px-3 py-3 border-b border-border/30 hover:bg-bg-hover transition-colors group"
                 >
                   <div className="w-8 h-8 rounded-lg bg-bg-elevated flex items-center justify-center text-[11px] font-bold text-text-muted group-hover:bg-bg-active">
