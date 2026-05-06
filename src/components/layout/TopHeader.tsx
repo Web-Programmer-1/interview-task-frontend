@@ -5,9 +5,6 @@ import { useSettingsStore, type AppTheme } from "@/store";
 import { useUIStore } from "@/store";
 import { cn } from "@/utils";
 
-// ─────────────────────────────────────────────────────────────
-// Theme config
-// ─────────────────────────────────────────────────────────────
 const THEMES: {
   id: AppTheme;
   label: string;
@@ -52,9 +49,6 @@ const THEMES: {
   },
 ];
 
-// ─────────────────────────────────────────────────────────────
-// Theme Dropdown
-// ─────────────────────────────────────────────────────────────
 function ThemeDropdown() {
   const { theme, setTheme } = useSettingsStore();
   const [open, setOpen] = useState(false);
@@ -65,7 +59,6 @@ function ThemeDropdown() {
     setMounted(true);
   }, []);
 
-  // Close on outside click
   useEffect(() => {
     function handler(e: MouseEvent) {
       if (ref.current && !ref.current.contains(e.target as Node)) {
@@ -86,7 +79,7 @@ function ThemeDropdown() {
 
   return (
     <div ref={ref} className="relative">
-      {/* Trigger button */}
+      {}
       <button
         onClick={() => setOpen((o) => !o)}
         className={cn(
@@ -101,7 +94,7 @@ function ThemeDropdown() {
         }}
         title="Change theme"
       >
-        {/* Color swatch */}
+        {}
         <span
           className="w-3.5 h-3.5 rounded-full flex-shrink-0 border border-white/20 shadow-sm"
           style={{ backgroundColor: current.bg }}
@@ -114,7 +107,7 @@ function ThemeDropdown() {
         />
       </button>
 
-      {/* Dropdown panel */}
+      {}
       {open && (
         <div
           className="absolute right-0 top-full mt-3 w-48 rounded-2xl border overflow-hidden z-50 shadow-2xl origin-top-right animate-in fade-in zoom-in-95 duration-200"
@@ -147,7 +140,7 @@ function ThemeDropdown() {
                     outline: isActive ? `2px solid var(--color-accent-muted)` : "none",
                   }}
                 >
-                  {/* Theme Icon */}
+                  {}
                   <span
                     className="flex items-center justify-center w-6 h-6 rounded-full flex-shrink-0"
                     style={{
@@ -160,7 +153,7 @@ function ThemeDropdown() {
                   
                   <span className="flex-1 text-left">{t.label}</span>
                   
-                  {/* Active check */}
+                  {}
                   {isActive && (
                     <span
                       className="w-4 h-4 rounded-full flex items-center justify-center text-[10px] font-bold"
@@ -179,9 +172,6 @@ function ThemeDropdown() {
   );
 }
 
-// ─────────────────────────────────────────────────────────────
-// Main TopHeader
-// ─────────────────────────────────────────────────────────────
 export function TopHeader() {
   const { openSearch } = useUIStore();
 
@@ -197,15 +187,15 @@ export function TopHeader() {
         transition: "background 0.3s ease",
       }}
     >
-      {/* Left — App branding */}
+      {}
       <div className="flex items-center gap-3">
-        {/* Left side empty or just a placeholder if needed, removing the logo and text */}
+        {}
       </div>
 
-      {/* Right — actions */}
+      {}
       <div className="flex items-center gap-2">
 
-        {/* Search button */}
+        {}
         <button
           onClick={openSearch}
           className="flex items-center gap-2 px-3 py-1.5 rounded-xl text-xs font-medium border transition-all duration-200 hover:scale-[1.02] active:scale-[0.98]"

@@ -7,14 +7,8 @@ import { useState, useEffect, useMemo } from "react";
 import Link from "next/link";
 import { AudioButton } from "@/features/reader/components/AudioButton";
 
-// ─────────────────────────────────────────────────────────────
-// Sort / Filter Options
-// ─────────────────────────────────────────────────────────────
 type SortMode = "newest" | "oldest" | "surah-asc" | "surah-desc";
 
-// ─────────────────────────────────────────────────────────────
-// Individual Wishlist Card
-// ─────────────────────────────────────────────────────────────
 function WishlistCard({ item, index }: { item: WishlistItem; index: number }) {
   const { removeItem } = useWishlistStore();
   const { font } = useSettingsStore();
@@ -59,13 +53,13 @@ function WishlistCard({ item, index }: { item: WishlistItem; index: number }) {
         animationDelay: `${index * 60}ms`,
       }}
     >
-      {/* Top bar — surah info + actions */}
+      {}
       <div
         className="flex items-center justify-between px-5 py-3 border-b"
         style={{ borderColor: "var(--border)" }}
       >
         <div className="flex items-center gap-3">
-          {/* Surah badge */}
+          {}
           <Link
             href={`/reading/${surahNum}`}
             className="flex items-center gap-2 group/link"
@@ -94,7 +88,7 @@ function WishlistCard({ item, index }: { item: WishlistItem; index: number }) {
           </Link>
         </div>
 
-        {/* Card actions */}
+        {}
         <div className="flex items-center gap-1.5 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
           <AudioButton
             verseKey={item.verse_key}
@@ -130,7 +124,7 @@ function WishlistCard({ item, index }: { item: WishlistItem; index: number }) {
         </div>
       </div>
 
-      {/* Arabic text */}
+      {}
       <div className="px-5 pt-5 pb-3">
         <p
           className="leading-loose"
@@ -148,7 +142,7 @@ function WishlistCard({ item, index }: { item: WishlistItem; index: number }) {
         </p>
       </div>
 
-      {/* Translation */}
+      {}
       {font.showTranslation && item.translation && (
         <div className="px-5 pb-5">
           <p
@@ -164,7 +158,7 @@ function WishlistCard({ item, index }: { item: WishlistItem; index: number }) {
         </div>
       )}
 
-      {/* Hover glow border */}
+      {}
       <div
         className="absolute inset-0 rounded-2xl pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300"
         style={{
@@ -176,13 +170,10 @@ function WishlistCard({ item, index }: { item: WishlistItem; index: number }) {
   );
 }
 
-// ─────────────────────────────────────────────────────────────
-// Empty State
-// ─────────────────────────────────────────────────────────────
 function EmptyState() {
   return (
     <div className="flex flex-col items-center justify-center py-20 px-6 text-center">
-      {/* Animated heart icon */}
+      {}
       <div
         className="relative w-24 h-24 rounded-full flex items-center justify-center mb-8"
         style={{
@@ -236,9 +227,6 @@ function EmptyState() {
   );
 }
 
-// ─────────────────────────────────────────────────────────────
-// Wishlist Page (Main)
-// ─────────────────────────────────────────────────────────────
 export default function WishlistPage() {
   const { items, clearAll } = useWishlistStore();
   const [sortMode, setSortMode] = useState<SortMode>("newest");
@@ -246,16 +234,13 @@ export default function WishlistPage() {
   const [showClearConfirm, setShowClearConfirm] = useState(false);
   const [mounted, setMounted] = useState(false);
 
-  // Hydration guard
   useEffect(() => {
     setMounted(true);
   }, []);
 
-  // Filtered & sorted items
   const processedItems = useMemo(() => {
     let result = [...items];
 
-    // Search filter
     if (searchQuery.trim()) {
       const q = searchQuery.toLowerCase();
       result = result.filter(
@@ -267,7 +252,6 @@ export default function WishlistPage() {
       );
     }
 
-    // Sort
     switch (sortMode) {
       case "newest":
         result.sort((a, b) => b.savedAt - a.savedAt);
@@ -299,12 +283,12 @@ export default function WishlistPage() {
 
   return (
     <div className="max-w-3xl mx-auto">
-      {/* ── Page Header ── */}
+      {}
       <div
         className="relative overflow-hidden px-6 pt-8 pb-6"
         style={{ borderBottom: "1px solid var(--border)" }}
       >
-        {/* Background decorative gradient */}
+        {}
         <div
           className="absolute inset-0 pointer-events-none"
           style={{
@@ -314,7 +298,7 @@ export default function WishlistPage() {
         />
 
         <div className="relative z-10">
-          {/* Back link */}
+          {}
           <Link
             href="/reading/1"
             className="inline-flex items-center gap-1.5 text-xs font-medium mb-5 transition-colors duration-200 hover:opacity-80"
@@ -355,7 +339,7 @@ export default function WishlistPage() {
               </div>
             </div>
 
-            {/* Clear all button */}
+            {}
             {items.length > 0 && (
               <div className="relative">
                 {showClearConfirm ? (
@@ -411,13 +395,13 @@ export default function WishlistPage() {
         </div>
       </div>
 
-      {/* ── Search & Sort Bar ── */}
+      {}
       {items.length > 0 && (
         <div
           className="flex items-center gap-3 px-6 py-4 border-b"
           style={{ borderColor: "var(--border)" }}
         >
-          {/* Search */}
+          {}
           <div
             className="flex-1 flex items-center gap-2 px-3 py-2 rounded-xl border"
             style={{
@@ -446,7 +430,7 @@ export default function WishlistPage() {
             )}
           </div>
 
-          {/* Sort dropdown */}
+          {}
           <div className="relative">
             <select
               value={sortMode}
@@ -473,7 +457,7 @@ export default function WishlistPage() {
         </div>
       )}
 
-      {/* ── Search results count ── */}
+      {}
       {searchQuery && items.length > 0 && (
         <div
           className="px-6 py-3 text-xs"
@@ -488,7 +472,7 @@ export default function WishlistPage() {
         </div>
       )}
 
-      {/* ── Verse Cards ── */}
+      {}
       {items.length === 0 ? (
         <EmptyState />
       ) : processedItems.length === 0 ? (
@@ -510,7 +494,7 @@ export default function WishlistPage() {
         </div>
       )}
 
-      {/* Bottom spacer */}
+      {}
       <div className="h-24" />
     </div>
   );

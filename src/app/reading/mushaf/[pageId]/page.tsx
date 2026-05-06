@@ -28,7 +28,6 @@ export default async function MushafPage({ params }: Props) {
 
   if (isNaN(pageNum) || pageNum < 1 || pageNum > 604) notFound();
 
-  // Fetch current page and next page in parallel for double spread
   const [leftVerses, rightVerses] = await Promise.all([
     getPageVerses(pageNum),
     pageNum > 1 ? getPageVerses(pageNum - 1) : Promise.resolve([]),

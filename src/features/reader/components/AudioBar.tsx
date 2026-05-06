@@ -43,7 +43,7 @@ export function AudioBar() {
         isVisible ? "h-[60px] opacity-100" : "h-0 border-0 opacity-0"
       )}
     >
-      {/* Icon */}
+      {}
       <div
         className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0"
         style={{ background: "rgba(66,128,56,0.2)", border: "1px solid rgba(66,128,56,0.3)" }}
@@ -55,7 +55,7 @@ export function AudioBar() {
         )}
       </div>
 
-      {/* Info */}
+      {}
       <div className="w-36 flex-shrink-0">
         <p className="text-xs font-medium text-text-primary truncate">
           Ayah {currentAyahId}
@@ -63,7 +63,7 @@ export function AudioBar() {
         <p className="text-[10px] text-text-muted">Surah {currentSurahId} · Al-Afasy</p>
       </div>
 
-      {/* Play / Pause / Stop */}
+      {}
       <div className="flex items-center gap-2 flex-shrink-0">
         <button
           onClick={handlePlayPause}
@@ -92,7 +92,7 @@ export function AudioBar() {
         </button>
       </div>
 
-      {/* Progress */}
+      {}
       <div className="flex-1 flex items-center gap-2 min-w-0">
         <span className="text-[10px] text-text-muted flex-shrink-0 w-8 text-right">
           {formatTime(currentTime)}
@@ -108,7 +108,7 @@ export function AudioBar() {
         </span>
       </div>
 
-      {/* Volume */}
+      {}
       <div className="flex items-center gap-2 flex-shrink-0 w-28">
         <Volume2 size={14} className="text-icon flex-shrink-0" />
         <input

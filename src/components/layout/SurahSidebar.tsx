@@ -7,8 +7,6 @@ import { cn } from "@/utils";
 import { Search, X, BookOpen, List, BookMarked } from "lucide-react";
 import { useState, useMemo } from "react";
 
-// Quran page → Surah mapping (pages 1-604)
-// Each entry: [pageStart, surahId] - simplified reference
 const JUZ_INFO: { juz: number; verseKey: string; pageStart: number }[] = [
   { juz: 1, verseKey: "1:1", pageStart: 1 },
   { juz: 2, verseKey: "2:142", pageStart: 22 },
@@ -72,7 +70,7 @@ export function SurahSidebar({ surahs: initialSurahs }: SurahSidebarProps) {
 
   return (
     <>
-      {/* ── Mobile backdrop ── */}
+      {}
       {surahSidebarOpen && (
         <div
           className="fixed inset-0 bg-black/60 z-30 md:hidden animate-fade-in"
@@ -80,7 +78,7 @@ export function SurahSidebar({ surahs: initialSurahs }: SurahSidebarProps) {
         />
       )}
 
-      {/* ── Sidebar Panel ── */}
+      {}
       <aside
         className={cn(
           "fixed top-0 left-0 h-full z-40 bg-bg-sidebar border-r border-border flex flex-col transition-all duration-500 ease-in-out",
@@ -90,7 +88,7 @@ export function SurahSidebar({ surahs: initialSurahs }: SurahSidebarProps) {
             : "w-[280px] -translate-x-full md:w-0 md:translate-x-0 md:border-r-0"
         )}
       >
-        {/* Header */}
+        {}
         <div className="flex items-center justify-between px-5 py-4 border-b border-border flex-shrink-0 bg-white/5 backdrop-blur-md">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-2xl bg-accent-green/10 flex items-center justify-center border border-accent-green/20 shadow-inner group overflow-hidden">
@@ -113,7 +111,7 @@ export function SurahSidebar({ surahs: initialSurahs }: SurahSidebarProps) {
           </button>
         </div>
 
-        {/* Tabs */}
+        {}
         <div className="flex p-1.5 gap-1 bg-bg-card/50 border-b border-border flex-shrink-0">
           {TABS.map((tab) => {
             const isActive = activeTab === tab.toLowerCase();
@@ -134,7 +132,7 @@ export function SurahSidebar({ surahs: initialSurahs }: SurahSidebarProps) {
           })}
         </div>
 
-        {/* Search */}
+        {}
         <div className="px-5 py-4 border-b border-border flex-shrink-0 bg-white/2">
           <div className="relative group">
             <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none">
@@ -158,7 +156,7 @@ export function SurahSidebar({ surahs: initialSurahs }: SurahSidebarProps) {
           </div>
         </div>
 
-        {/* List */}
+        {}
         <div className="flex-1 overflow-y-auto">
           {isLoading ? (
             <div className="p-5 space-y-4">
@@ -195,12 +193,12 @@ export function SurahSidebar({ surahs: initialSurahs }: SurahSidebarProps) {
                       isActive && "bg-accent-green/5"
                     )}
                   >
-                    {/* Active indicator bar */}
+                    {}
                     {isActive && (
                       <div className="absolute left-0 top-0 bottom-0 w-1 bg-accent-green shadow-[0_0_10px_rgba(76,175,80,0.5)]" />
                     )}
 
-                    {/* Number badge */}
+                    {}
                     <div
                       className={cn(
                         "w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 text-xs font-bold transition-all duration-500 shadow-sm",
@@ -212,7 +210,7 @@ export function SurahSidebar({ surahs: initialSurahs }: SurahSidebarProps) {
                       {surah.id}
                     </div>
  
-                    {/* Names */}
+                    {}
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center justify-between gap-2 mb-0.5">
                         <span
@@ -267,7 +265,7 @@ export function SurahSidebar({ surahs: initialSurahs }: SurahSidebarProps) {
               )}
             </nav>
           ) : activeTab === "page" ? (
-            // ── Page list (1-604) ──
+            
             <nav>
               {Array.from({ length: 604 }, (_, i) => {
                 const p = i + 1;
@@ -288,7 +286,7 @@ export function SurahSidebar({ surahs: initialSurahs }: SurahSidebarProps) {
                       isActive && "sidebar-item-active"
                     )}
                   >
-                    {/* Page number badge */}
+                    {}
                     <div
                       className={cn(
                         "w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 text-[11px] font-bold",
@@ -319,7 +317,7 @@ export function SurahSidebar({ surahs: initialSurahs }: SurahSidebarProps) {
               })}
             </nav>
           ) : (
-            // ── Juz list ──
+            
             <nav>
               {JUZ_INFO.map((juz) => (
                 <Link

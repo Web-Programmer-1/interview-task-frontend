@@ -13,7 +13,6 @@ export function MobileNav() {
   const items = useWishlistStore((s) => s.items);
   const [count, setCount] = useState(0);
 
-  // Hydration-safe count
   useEffect(() => {
     setCount(items.length);
   }, [items.length]);

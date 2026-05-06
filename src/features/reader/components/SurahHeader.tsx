@@ -21,7 +21,7 @@ export function SurahHeader({ surah }: SurahHeaderProps) {
 
   return (
     <div className="relative mb-2">
-      {/* Banner card */}
+      {}
       <div
         className="mx-6 my-6 rounded-2xl overflow-hidden relative shadow-sm"
         style={{
@@ -29,12 +29,12 @@ export function SurahHeader({ surah }: SurahHeaderProps) {
           border: "1px solid var(--border)",
         }}
       >
-        {/* Decorative circles */}
+        {}
         <div className="absolute -top-8 -right-8 w-40 h-40 rounded-full bg-accent-green-muted opacity-50" />
         <div className="absolute -bottom-4 -left-4 w-24 h-24 rounded-full bg-accent-green-muted opacity-50" />
 
         <div className="relative z-10 flex flex-col items-center py-10 px-6 text-center">
-          {/* Arabic Surah Name */}
+          {}
           <h1
             className="text-5xl font-bold text-text-primary mb-3"
             style={{ fontFamily: "'Amiri Quran', 'Amiri', serif" }}
@@ -44,7 +44,7 @@ export function SurahHeader({ surah }: SurahHeaderProps) {
             {surah.name_arabic}
           </h1>
 
-          {/* English name */}
+          {}
           <p className="text-accent-green-light text-lg font-semibold mb-1 tracking-wide">
             {surah.name_simple}
           </p>
@@ -52,13 +52,13 @@ export function SurahHeader({ surah }: SurahHeaderProps) {
             {surah.translated_name?.name}
           </p>
 
-          {/* Divider */}
+          {}
           <div
             className="w-32 h-px mb-6"
             style={{ background: "linear-gradient(90deg, transparent, var(--color-accent), transparent)" }}
           />
 
-          {/* Stats row */}
+          {}
           <div className="flex items-center gap-8 text-sm">
             <div className="flex flex-col items-center gap-1">
               <span className="text-text-muted text-xs uppercase tracking-widest">Surah</span>
@@ -85,14 +85,14 @@ export function SurahHeader({ surah }: SurahHeaderProps) {
         </div>
       </div>
 
-      {/* Bismillah (all surahs except Al-Tawbah #9) */}
+      {}
       {surah.bismillah_pre && (
         <div className="text-center py-4 px-6 mb-2">
           <p
             className="text-text-arabic"
             style={{ 
               fontFamily: bismillahFont,
-              fontSize: `${Math.max(28, font.arabicFontSize * 0.9)}px` // Scale relative to reading font
+              fontSize: `${Math.max(28, font.arabicFontSize * 0.9)}px` 
             }}
             dir="rtl"
             lang="ar"

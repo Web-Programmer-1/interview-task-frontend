@@ -1,12 +1,9 @@
-/* ============================================================
-   Arabic Fonts — MUST be first (before @tailwind)
-   ============================================================ */
+
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* KFGQPC Uthmanic Script HAFS (Qurancomplex.gov.sa) */
 @font-face {
   font-family: 'KFGQPC Uthmanic Script HAFS';
   src: url('https://fonts.qurancomplex.gov.sa/KFGQPC%20HAFS%20Uthmanic%20Script.ttf') format('truetype');
@@ -15,9 +12,6 @@
   font-display: swap;
 }
 
-/* ============================================================
-   Root — Layout Constants (never change per theme)
-   ============================================================ */
 :root {
   --font-arabic: 'KFGQPC Uthmanic Script HAFS', 'Amiri Quran', serif;
   --sidebar-width: 60px;
@@ -25,9 +19,6 @@
   --settings-width: 300px;
 }
 
-/* ============================================================
-   DARK THEME (default)
-   ============================================================ */
 [data-theme="dark"], :root {
   --color-accent:        #428038;
   --color-accent-light:  #52A046;
@@ -62,9 +53,6 @@
   --glass-border:  rgba(255,255,255,0.08);
 }
 
-/* ============================================================
-   LIGHT THEME
-   ============================================================ */
 [data-theme="light"] {
   --color-accent:        #2E6B24;
   --color-accent-light:  #3A8B2E;
@@ -99,9 +87,6 @@
   --glass-border:  rgba(0,0,0,0.08);
 }
 
-/* ============================================================
-   SEPIA THEME
-   ============================================================ */
 [data-theme="sepia"] {
   --color-accent:        #8B5E3C;
   --color-accent-light:  #A67450;
@@ -136,9 +121,6 @@
   --glass-border:  rgba(100,70,40,0.15);
 }
 
-/* ============================================================
-   GREEN THEME
-   ============================================================ */
 [data-theme="green"] {
   --color-accent:        #4CAF50;
   --color-accent-light:  #66BB6A;
@@ -173,9 +155,6 @@
   --glass-border:  rgba(76,175,80,0.15);
 }
 
-/* ============================================================
-   RED THEME
-   ============================================================ */
 [data-theme="red"] {
   --color-accent:        #C0392B;
   --color-accent-light:  #E74C3C;
@@ -210,10 +189,6 @@
   --glass-border:  rgba(192,57,43,0.15);
 }
 
-
-
-
-
 * {
   box-sizing: border-box;
   margin: 0;
@@ -241,14 +216,11 @@ body {
   animation: mesh-move 20s ease infinite;
   color: var(--text-primary);
   font-family: 'Inter', system-ui, sans-serif;
-  overflow: hidden; /* prevent body scroll — layout handles scroll */
+  overflow: hidden; 
   height: 100vh;
   transition: background 0.8s cubic-bezier(0.4, 0, 0.2, 1), color 0.3s ease;
 }
 
-/* ============================================================
-   Custom Scrollbar (Dark Theme)
-   ============================================================ */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
@@ -267,9 +239,6 @@ body {
   background: var(--border-light);
 }
 
-/* ============================================================
-   Arabic Text Base Styles
-   ============================================================ */
 .arabic-text {
   font-family: var(--font-arabic);
   direction: rtl;
@@ -291,9 +260,6 @@ body {
   font-family: 'Scheherazade New', serif;
 }
 
-/* ============================================================
-   Layout Utilities
-   ============================================================ */
 .quran-layout {
   display: flex;
   height: 100vh;
@@ -306,9 +272,6 @@ body {
   height: 100vh;
 }
 
-/* ============================================================
-   Search highlight
-   ============================================================ */
 mark {
   background-color: rgba(66, 128, 56, 0.4);
   color: #7CDB6A;
@@ -316,16 +279,10 @@ mark {
   border-radius: 2px;
 }
 
-/* ============================================================
-   Transition Helpers
-   ============================================================ */
 .sidebar-transition {
   transition: width 0.3s ease, transform 0.3s ease, opacity 0.3s ease;
 }
 
-/* ============================================================
-   Verse Number Badge
-   ============================================================ */
 .verse-badge {
   display: inline-flex;
   align-items: center;
@@ -340,17 +297,11 @@ mark {
   flex-shrink: 0;
 }
 
-/* ============================================================
-   Active state for sidebar items
-   ============================================================ */
 .sidebar-item-active {
   background-color: rgba(66, 128, 56, 0.08);
   border-left: 2px solid #428038;
 }
 
-/* ============================================================
-   Icon Sidebar Buttons
-   ============================================================ */
 .icon-btn {
   display: flex;
   align-items: center;
@@ -396,9 +347,6 @@ mark {
   color: var(--text-primary);
 }
 
-/* ============================================================
-   Mobile Nav Button
-   ============================================================ */
 .mobile-nav-btn {
   display: flex;
   flex-direction: column;
@@ -419,9 +367,6 @@ mark {
   color: var(--text-primary);
 }
 
-/* ============================================================
-   Surah card hover actions (hidden by default)
-   ============================================================ */
 .ayah-actions {
   opacity: 0;
   transition: opacity 0.2s ease;
@@ -431,9 +376,6 @@ mark {
   opacity: 1;
 }
 
-/* ============================================================
-   Wishlist Card Animations
-   ============================================================ */
 @keyframes fadeSlideIn {
   from {
     opacity: 0;
@@ -454,9 +396,6 @@ mark {
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
 }
 
-/* ============================================================
-   Custom Scrollbar
-   ============================================================ */
 .custom-scrollbar::-webkit-scrollbar {
   width: 5px;
 }
@@ -471,9 +410,6 @@ mark {
   background: var(--text-muted);
 }
 
-/* ============================================================
-   Animations
-   ============================================================ */
 @keyframes fade-in {
   from { opacity: 0; }
   to { opacity: 1; }
@@ -492,9 +428,6 @@ mark {
   animation: slide-up 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-/* ============================================================
-   Ayah Action Button Animations
-   ============================================================ */
 @keyframes breath {
   0%, 100% { transform: scale(1); opacity: 0.8; }
   50% { transform: scale(1.05); opacity: 1; }

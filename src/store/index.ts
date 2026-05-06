@@ -4,9 +4,6 @@ import type { AppSettings, SidebarState, PlaybackState } from "@/types";
 
 export type AppTheme = "dark" | "light" | "sepia" | "green" | "red";
 
-// ============================================================
-// Default Settings
-// ============================================================
 const defaultSettings: AppSettings = {
   font: {
     arabicFont: "kfgq",
@@ -14,7 +11,7 @@ const defaultSettings: AppSettings = {
     translationFontSize: 16,
     showTranslation: true,
     showTransliteration: false,
-    translationLang: "en", // Default to English
+    translationLang: "en", 
   },
   reading: {
     mushafStyle: "madani",
@@ -24,9 +21,6 @@ const defaultSettings: AppSettings = {
   theme: "green" as AppTheme,
 };
 
-// ============================================================
-// Settings Store — persisted to localStorage
-// ============================================================
 interface SettingsStore extends AppSettings {
   theme: AppTheme;
   setTheme: (theme: AppTheme) => void;
@@ -51,18 +45,15 @@ export const useSettingsStore = create<SettingsStore>()(
   )
 );
 
-// ============================================================
-// Audio Store
-// ============================================================
 interface AudioStore {
   currentAyahId: number | null;
   currentSurahId: number | null;
-  currentVerseKey: string | null;   // e.g. "1:1"
+  currentVerseKey: string | null;   
   playbackState: PlaybackState;
   duration: number;
   currentTime: number;
   reciter: string;
-  // Actions
+  
   startPlaying: (ayahId: number, surahId: number, verseKey: string) => void;
   setPaused: () => void;
   setStopped: () => void;
@@ -87,13 +78,9 @@ export const useAudioStore = create<AudioStore>((set) => ({
   setProgress: (currentTime, duration) => set({ currentTime, duration }),
 }));
 
-// Backwards compat alias (used in AudioButton)
 export const setPlaying = (ayahId: number, surahId: number, verseKey: string) =>
   useAudioStore.getState().startPlaying(ayahId, surahId, verseKey);
 
-// ============================================================
-// UI / Sidebar Store
-// ============================================================
 interface UIStore extends SidebarState {
   searchOpen: boolean;
   toggleSurahSidebar: () => void;

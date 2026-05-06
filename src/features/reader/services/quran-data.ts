@@ -1,12 +1,39 @@
-// AlQuran.cloud API — free, no API key needed, returns Arabic + Translation together
-export const ALQURAN = "https://api.alquran.cloud/v1";
-// Local Backend for metadata and ayahs
-export const BACKEND_API = "https://interview-task-backend-nu.vercel.app/api";
-export const QURAN_COM = BACKEND_API; // Redirect metadata calls to local backend
 
-// ─────────────────────────────────────────────────────────────
-// Types
-// ─────────────────────────────────────────────────────────────
+export const ALQURAN = "https://api.alquran.cloud/v1";
+
+// Priority: Environment Variable, then Hardcoded Fallback
+export const BACKEND_API = process.env.NEXT_PUBLIC_API_URL || "https://interview-task-backend-nu.vercel.app/api";
+export const QURAN_COM = BACKEND_API; 
+
+// Helper to fetch with a timeout and retries to handle backend cold starts
+async function fetchWithTimeout(url: string, options: any = {}, timeout = 15000, retries = 2) {
+  for (let i = 0; i <= retries; i++) {
+    const controller = new AbortController();
+    const id = setTimeout(() => controller.abort(), timeout);
+    
+    try {
+      const response = await fetch(url, {
+        ...options,
+        signal: controller.signal,
+      });
+      clearTimeout(id);
+      
+      if (!response.ok && i < retries && response.status >= 500) {
+        console.warn(`Attempt ${i + 1} failed with status ${response.status}. Retrying...`);
+        continue; // Retry on server errors
+      }
+      
+      return response;
+    } catch (error) {
+      clearTimeout(id);
+      if (i === retries) throw error;
+      console.warn(`Attempt ${i + 1} timed out or failed. Retrying in 1s...`);
+      await new Promise(resolve => setTimeout(resolve, 1000));
+    }
+  }
+  throw new Error("Failed to fetch after retries");
+}
+
 export interface SurahMeta {
   id: number;
   name_arabic: string;
@@ -21,21 +48,21 @@ export interface SurahMeta {
 }
 
 export interface Verse {
-  id: number;             // global verse number
-  verse_number: number;   // verse within surah
-  verse_key: string;      // "1:1"
-  text_uthmani: string;   // Arabic text
-  translation: string;    // English (Saheeh International)
+  id: number;             
+  verse_number: number;   
+  verse_key: string;      
+  text_uthmani: string;   
+  translation: string;    
 }
 
-// ─────────────────────────────────────────────────────────────
-// All 114 Surahs (from Quran.com — rich metadata)
-// ─────────────────────────────────────────────────────────────
 export async function getAllSurahs(): Promise<SurahMeta[]> {
   try {
-    const res = await fetch(`${BACKEND_API}/surahs`, {
+    const res = await fetchWithTimeout(`${BACKEND_API}/surahs`, {
       next: { revalidate: 86400 },
     });
+    
+    if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
+    
     const data = await res.json();
     
     if (!Array.isArray(data)) {
@@ -43,7 +70,6 @@ export async function getAllSurahs(): Promise<SurahMeta[]> {
       return [];
     }
 
-    // Map camelCase to snake_case for frontend compatibility
     return data.map((s: any) => ({
       id: s.id,
       name_arabic: s.nameArabic,
@@ -62,36 +88,42 @@ export async function getAllSurahs(): Promise<SurahMeta[]> {
   }
 }
 
-// ─────────────────────────────────────────────────────────────
-// Single Surah Metadata
-// ─────────────────────────────────────────────────────────────
 export async function getSurahMeta(id: number): Promise<SurahMeta> {
-  const res = await fetch(`${BACKEND_API}/surahs/${id}`, {
-    next: { revalidate: 86400 },
-  });
-  const s = await res.json();
-  return {
-    id: s.id,
-    name_arabic: s.nameArabic,
-    name_simple: s.nameSimple,
-    name_complex: s.nameComplex,
-    translated_name: { name: s.nameTranslation },
-    verses_count: s.versesCount,
-    revelation_place: s.revelationPlace,
-    page_start: s.pageStart,
-    page_end: s.pageEnd,
-    bismillah_pre: s.bismillahPre
-  } as SurahMeta;
-}
-
-// ─────────────────────────────────────────────────────────────
-// Fetch verses: Arabic + Translation in parallel
-// ─────────────────────────────────────────────────────────────
-export async function getSurahVerses(surahId: number): Promise<Verse[]> {
   try {
-    const res = await fetch(`${BACKEND_API}/surahs/${surahId}/ayahs`, {
+    const res = await fetchWithTimeout(`${BACKEND_API}/surahs/${id}`, {
       next: { revalidate: 86400 },
     });
+    
+    if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
+    
+    const s = await res.json();
+    return {
+      id: s.id,
+      name_arabic: s.nameArabic,
+      name_simple: s.nameSimple,
+      name_complex: s.nameComplex,
+      translated_name: { name: s.nameTranslation },
+      verses_count: s.versesCount,
+      revelation_place: s.revelationPlace,
+      page_start: s.pageStart,
+      page_end: s.pageEnd,
+      bismillah_pre: s.bismillahPre
+    } as SurahMeta;
+  } catch (error) {
+    console.error(`Failed to fetch surah meta for ${id}:`, error);
+    // Return a minimal fallback object to prevent page crash
+    return { id, name_simple: "Error loading", name_arabic: "" } as SurahMeta;
+  }
+}
+
+export async function getSurahVerses(surahId: number): Promise<Verse[]> {
+  try {
+    const res = await fetchWithTimeout(`${BACKEND_API}/surahs/${surahId}/ayahs`, {
+      next: { revalidate: 86400 },
+    });
+    
+    if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
+    
     const data = await res.json();
     
     if (!Array.isArray(data)) {
@@ -112,47 +144,42 @@ export async function getSurahVerses(surahId: number): Promise<Verse[]> {
   }
 }
 
-// ─────────────────────────────────────────────────────────────
-// Search Verses (Quran.com search)
-// ─────────────────────────────────────────────────────────────
 export async function searchVerses(query: string) {
   if (!query.trim()) return [];
-  const res = await fetch(
-    `${QURAN_COM}/search?q=${encodeURIComponent(query)}&size=20&page=1&language=en`,
-    { cache: "no-store" }
-  );
-  const data = await res.json();
-  return (data.search?.results ?? []) as {
-    verse_key: string;
-    text: string;
-    translations: { text: string; name: string }[];
-  }[];
+  try {
+    const res = await fetchWithTimeout(
+      `${QURAN_COM}/search?q=${encodeURIComponent(query)}&size=20&page=1&language=en`,
+      { cache: "no-store" }
+    );
+    
+    if (!res.ok) return [];
+    
+    const data = await res.json();
+    return (data.search?.results ?? []) as {
+      verse_key: string;
+      text: string;
+      translations: { text: string; name: string }[];
+    }[];
+  } catch (error) {
+    console.error("Search failed:", error);
+    return [];
+  }
 }
 
-// ─────────────────────────────────────────────────────────────
-// SSG: generate params for all 114 surah pages
-// ─────────────────────────────────────────────────────────────
 export function generateSurahParams() {
   return Array.from({ length: 114 }, (_, i) => ({ surahId: String(i + 1) }));
 }
 
-// SSG: generate params for all 604 mushaf pages
 export function generatePageParams() {
   return Array.from({ length: 604 }, (_, i) => ({ pageId: String(i + 1) }));
 }
 
-// ─────────────────────────────────────────────────────────────
-// Audio URL — EveryAyah CDN (free, no key)
-// ─────────────────────────────────────────────────────────────
 export function getAudioUrl(verseKey: string): string {
   const [s, v] = verseKey.split(":").map(Number);
   const key = `${String(s).padStart(3, "0")}${String(v).padStart(3, "0")}`;
   return `https://verses.quran.com/Alafasy/mp3/${key}.mp3`;
 }
 
-// ─────────────────────────────────────────────────────────────
-// Page Verse — verse info for Mushaf page view
-// ─────────────────────────────────────────────────────────────
 export interface PageVerse {
   id: number;
   verse_number: number;
@@ -166,8 +193,6 @@ export interface PageVerse {
   page_number: number;
 }
 
-// Fetch all verses on a Quran page (page 1-604)
-// Uses alquran.cloud API
 export async function getPageVerses(pageNum: number): Promise<PageVerse[]> {
   const [arabicRes, transRes] = await Promise.all([
     fetch(`${ALQURAN}/page/${pageNum}/quran-uthmani`, { next: { revalidate: 86400 } }),

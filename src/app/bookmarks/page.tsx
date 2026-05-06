@@ -7,14 +7,8 @@ import { useState, useEffect, useMemo } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
-// ─────────────────────────────────────────────────────────────
-// Sort / Filter Options
-// ─────────────────────────────────────────────────────────────
 type SortMode = "newest" | "oldest" | "surah-asc" | "surah-desc";
 
-// ─────────────────────────────────────────────────────────────
-// Individual Bookmark Card
-// ─────────────────────────────────────────────────────────────
 import { MoreHorizontal } from "lucide-react";
 import { ShareModal } from "@/components/ui/ShareModal";
 
@@ -61,7 +55,6 @@ function BookmarkCard({ item, index }: { item: BookmarkItem; index: number }) {
     hafs: "'KFGQPC Uthmanic Script HAFS', serif",
   };
 
-  // Truncate text for preview
   const truncatedArabic = item.text_uthmani.length > 80 
     ? item.text_uthmani.substring(0, 80) + "..." 
     : item.text_uthmani;
@@ -83,14 +76,14 @@ function BookmarkCard({ item, index }: { item: BookmarkItem; index: number }) {
         animationDelay: `${index * 50}ms`,
       }}
     >
-      {/* Left Accent Bar */}
+      {}
       <div 
         className="w-1.5 hidden sm:block" 
         style={{ background: "linear-gradient(to bottom, var(--color-accent), var(--color-accent-light))" }}
       />
 
       <div className="flex-1 p-5 flex flex-col justify-between">
-        {/* Header */}
+        {}
         <div className="flex justify-between items-start mb-4">
           <div className="flex items-center gap-3">
             <div
@@ -129,7 +122,7 @@ function BookmarkCard({ item, index }: { item: BookmarkItem; index: number }) {
           </div>
         </div>
 
-        {/* Text Preview */}
+        {}
         <div className="mb-5 flex-1 opacity-70 group-hover:opacity-100 transition-opacity">
           <p
             className="text-right leading-loose mb-2"
@@ -153,7 +146,7 @@ function BookmarkCard({ item, index }: { item: BookmarkItem; index: number }) {
           )}
         </div>
 
-        {/* Action button */}
+        {}
         <div className="mt-auto">
           <div
             className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold transition-all duration-300 group-hover:-translate-y-0.5"
@@ -169,7 +162,7 @@ function BookmarkCard({ item, index }: { item: BookmarkItem; index: number }) {
         </div>
       </div>
       
-      {/* Share Modal */}
+      {}
       <ShareModal
         isOpen={showShare}
         onClose={() => setShowShare(false)}
@@ -177,7 +170,7 @@ function BookmarkCard({ item, index }: { item: BookmarkItem; index: number }) {
         title={shareTitle}
       />
 
-      {/* Hover glow */}
+      {}
       <div
         className="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300"
         style={{ boxShadow: "inset 0 0 0 1px var(--color-accent)" }}
@@ -186,9 +179,6 @@ function BookmarkCard({ item, index }: { item: BookmarkItem; index: number }) {
   );
 }
 
-// ─────────────────────────────────────────────────────────────
-// Empty State
-// ─────────────────────────────────────────────────────────────
 function EmptyState() {
   return (
     <div className="flex flex-col items-center justify-center py-24 px-6 text-center">

@@ -10,12 +10,10 @@ interface Props {
   params: Promise<{ surahId: string }>;
 }
 
-// SSG: pre-render all 114 surah pages at build time
 export async function generateStaticParams() {
   return generateSurahParams();
 }
 
-// Dynamic SEO metadata per surah
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { surahId } = await params;
   const id = Number(surahId);
@@ -39,20 +37,18 @@ export default async function SurahPage({ params }: Props) {
     getSurahVerses(id),
   ]);
 
-  // Calculate global verse offset for audio URLs
-  // We use verse_key "surahId:verseNum" directly
   const prevId = id > 1 ? id - 1 : null;
   const nextId = id < 114 ? id + 1 : null;
 
   return (
     <article className="max-w-3xl mx-auto">
-      {/* Surah Header Banner */}
+      {}
       <SurahHeader surah={surah} />
 
-      {/* Ayah List */}
+      {}
       <AyahListClient initialVerses={verses} surahId={id} surahName={surah.name_simple} />
 
-      {/* Navigation: Prev / Next Surah */}
+      {}
       <div className="flex items-center justify-between gap-4 p-6 border-t border-border">
         {prevId ? (
           <Link

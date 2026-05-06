@@ -2,14 +2,14 @@ import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
 export interface BookmarkItem {
-  id: number;               // Global verse ID
-  verse_key: string;        // "1:1"
+  id: number;               
+  verse_key: string;        
   surah_id: number;
   verse_number: number;
-  text_uthmani: string;     // First few words or full text
+  text_uthmani: string;     
   translation: string;
   surah_name?: string;
-  savedAt: number;          // Timestamp
+  savedAt: number;          
 }
 
 interface BookmarkStore {
@@ -27,7 +27,7 @@ export const useBookmarkStore = create<BookmarkStore>()(
       items: [],
       addBookmark: (item) =>
         set((state) => {
-          // Prevent duplicates
+          
           if (state.items.some((i) => i.verse_key === item.verse_key)) {
             return state;
           }

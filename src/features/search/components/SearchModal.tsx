@@ -23,7 +23,6 @@ export function SearchModal() {
     skip: !debouncedTerm.trim(),
   });
 
-  // Focus input when modal opens
   useEffect(() => {
     if (searchOpen) {
       setTimeout(() => inputRef.current?.focus(), 100);
@@ -33,7 +32,6 @@ export function SearchModal() {
     }
   }, [searchOpen]);
 
-  // Keyboard shortcut: Ctrl+K or /
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
       if ((e.ctrlKey && e.key === "k") || (e.key === "/" && !searchOpen)) {
@@ -47,7 +45,6 @@ export function SearchModal() {
     return () => window.removeEventListener("keydown", handler);
   }, [searchOpen, closeSearch]);
 
-  // Debounced search
   const handleSearch = useCallback((value: string) => {
     setQuery(value);
     if (timerRef.current) clearTimeout(timerRef.current);
@@ -61,13 +58,13 @@ export function SearchModal() {
 
   return (
     <div className="fixed inset-0 z-[100] flex items-start justify-center pt-20 px-4">
-      {/* Backdrop */}
+      {}
       <div
         className="absolute inset-0 bg-black/80 backdrop-blur-sm"
         onClick={closeSearch}
       />
 
-      {/* Modal */}
+      {}
       <div
         className="relative w-full max-w-2xl rounded-2xl overflow-hidden shadow-modal animate-fade-in"
         style={{ 
@@ -76,7 +73,7 @@ export function SearchModal() {
           border: "1px solid var(--border)" 
         }}
       >
-        {/* Search Input */}
+        {}
         <div className="flex items-center gap-3 px-4 py-4 border-b border-border">
           <Search size={18} className="text-icon flex-shrink-0" />
           <input
@@ -96,7 +93,7 @@ export function SearchModal() {
           </button>
         </div>
 
-        {/* Shortcut hint */}
+        {}
         {!query && (
           <div className="px-4 py-3 flex items-center gap-3 text-[11px] text-text-disabled border-b border-border/40">
             <span className="px-1.5 py-0.5 bg-bg-elevated rounded text-[10px] border border-border">Ctrl+K</span>
@@ -106,7 +103,7 @@ export function SearchModal() {
           </div>
         )}
 
-        {/* Results */}
+        {}
         <div className="max-h-[60vh] overflow-y-auto">
           {results.length > 0 ? (
             <ul>

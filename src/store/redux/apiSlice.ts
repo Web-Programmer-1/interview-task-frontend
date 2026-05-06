@@ -24,7 +24,8 @@ export interface Verse {
 export const quranApi = createApi({
   reducerPath: 'quranApi',
   baseQuery: fetchBaseQuery({ 
-    baseUrl: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api' 
+    baseUrl: process.env.NEXT_PUBLIC_API_URL || 'https://interview-task-backend-nu.vercel.app/api',
+    timeout: 15000, // 15 seconds timeout
   }),
   tagTypes: ['Surah', 'Ayah'],
   endpoints: (builder) => ({

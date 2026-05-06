@@ -1,23 +1,17 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
-// ============================================================
-// Wishlist Item — saved verse data
-// ============================================================
 export interface WishlistItem {
-  id: number;               // global verse number
-  verse_key: string;         // "1:1"
+  id: number;               
+  verse_key: string;         
   surah_id: number;
   verse_number: number;
-  text_uthmani: string;      // Arabic text
-  translation: string;       // English
-  surah_name?: string;       // e.g. "Al-Fatiha"
-  savedAt: number;           // timestamp
+  text_uthmani: string;      
+  translation: string;       
+  surah_name?: string;       
+  savedAt: number;           
 }
 
-// ============================================================
-// Wishlist Store — persisted to localStorage
-// ============================================================
 interface WishlistStore {
   items: WishlistItem[];
   addItem: (item: Omit<WishlistItem, "savedAt">) => void;
@@ -34,7 +28,7 @@ export const useWishlistStore = create<WishlistStore>()(
 
       addItem: (item) =>
         set((state) => {
-          // Don't add duplicates
+          
           if (state.items.some((i) => i.verse_key === item.verse_key)) {
             return state;
           }

@@ -28,14 +28,13 @@ export function AyahCard({ verse, surahId, globalVerseId, surahName }: AyahCardP
   const [bmAnimating, setBmAnimating] = useState(false);
   const [showShare, setShowShare] = useState(false);
 
-  // Hydration-safe checks
   useEffect(() => {
     setSaved(isInWishlist(verse.verse_key));
     setBookmarked(isBookmarked(verse.verse_key));
   }, [isInWishlist, isBookmarked, verse.verse_key]);
 
   const isPlaying = currentAyahId === globalVerseId;
-  // translation is now a plain string (merged from parallel API call)
+  
   const cleanTranslation = verse.translation?.replace(/<[^>]*>/g, "") ?? "";
 
   const fontFamilyMap: Record<string, string> = {
@@ -101,14 +100,14 @@ export function AyahCard({ verse, surahId, globalVerseId, surahName }: AyahCardP
         isPlaying && "bg-accent-green/5 border-l-2 border-l-accent-green"
       )}
     >
-      {/* Verse number + action buttons row */}
+      {}
       <div className="flex items-center justify-between mb-6">
-        {/* Verse number badge */}
+        {}
         <div className="verse-badge text-xs font-semibold" title={`Verse ${verse.verse_number}`}>
           {verse.verse_number}
         </div>
 
-        {/* Action buttons bar */}
+        {}
         <div className="flex items-center gap-1.5 p-1.5 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-md shadow-lg transition-all duration-300">
           <AudioButton
             verseKey={verse.verse_key}
@@ -182,7 +181,7 @@ export function AyahCard({ verse, surahId, globalVerseId, surahName }: AyahCardP
         </div>
       </div>
 
-      {/* Share Modal */}
+      {}
       <ShareModal
         isOpen={showShare}
         onClose={() => setShowShare(false)}
@@ -190,7 +189,7 @@ export function AyahCard({ verse, surahId, globalVerseId, surahName }: AyahCardP
         title={`Read Ayah ${verse.verse_key} from Surah ${surahName || surahId} on Quran Guide`}
       />
 
-      {/* Arabic Text */}
+      {}
       <p
         className="text-text-arabic text-right leading-loose mb-6 direction-rtl"
         style={arabicStyle}
@@ -200,7 +199,7 @@ export function AyahCard({ verse, surahId, globalVerseId, surahName }: AyahCardP
         {verse.text_uthmani}
       </p>
 
-      {/* English Translation */}
+      {}
       {font.showTranslation && (
         <p
           className="text-text-secondary leading-relaxed"

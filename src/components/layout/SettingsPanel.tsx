@@ -43,7 +43,7 @@ export function SettingsPanel() {
 
   return (
     <>
-      {/* ── Mobile backdrop ── */}
+      {}
       {settingsPanelOpen && (
         <div
           className="fixed inset-0 bg-black/60 z-30 lg:hidden animate-fade-in backdrop-blur-sm"
@@ -54,13 +54,13 @@ export function SettingsPanel() {
       <aside
         className={cn(
           "fixed top-0 right-0 h-full z-40 bg-bg-sidebar border-l border-border transition-all duration-500 ease-in-out flex flex-col shadow-2xl",
-          // Desktop: Always visible and relative
+          
           "lg:relative lg:translate-x-0 lg:z-auto lg:shadow-none lg:w-[320px]",
-          // Mobile: Drawer behavior
+          
           settingsPanelOpen ? "translate-x-0 w-[320px]" : "translate-x-full w-[320px] lg:translate-x-0"
         )}
       >
-        {/* Header */}
+        {}
         <div className="flex items-center justify-between px-5 py-4 border-b border-border flex-shrink-0 bg-bg-sidebar/80 backdrop-blur-md">
           <div className="flex items-center gap-2">
             <div className="p-1.5 rounded-lg bg-accent-green/10 text-accent-green">
@@ -76,7 +76,7 @@ export function SettingsPanel() {
           </button>
         </div>
 
-        {/* Tabs */}
+        {}
         <div className="flex p-1.5 gap-1.5 bg-bg-card/30 border-b border-border flex-shrink-0">
           {[
             { id: "translation", label: "Translation", icon: BookOpen },
@@ -94,7 +94,7 @@ export function SettingsPanel() {
                     : "text-text-muted hover:text-text-primary hover:bg-bg-hover"
                 )}
               >
-                {/* Background Gradient for Active Tab */}
+                {}
                 {isActive && (
                   <div className="absolute inset-0 bg-gradient-to-br from-accent-green to-accent-green-light" />
                 )}
@@ -106,9 +106,9 @@ export function SettingsPanel() {
           })}
         </div>
 
-        {/* Scrollable content */}
+        {}
         <div className="flex-1 overflow-y-auto px-5 py-6 space-y-8 custom-scrollbar">
-          {/* ── App Theme ── */}
+          {}
           <section className="space-y-4">
             <div className="flex items-center justify-between">
               <h3 className="text-[11px] font-bold text-text-muted uppercase tracking-widest">App Theme</h3>
@@ -119,7 +119,7 @@ export function SettingsPanel() {
 
           {settingsTab === "translation" && (
             <>
-              {/* ── Arabic Font ── */}
+              {}
               <section className="space-y-4">
                 <div className="flex items-center justify-between">
                   <h3 className="text-[11px] font-bold text-text-muted uppercase tracking-widest">Arabic Font</h3>
@@ -143,7 +143,7 @@ export function SettingsPanel() {
                 </div>
               </section>
 
-              {/* ── Translation Language ── */}
+              {}
               <section className="space-y-4">
                 <div className="flex items-center justify-between">
                   <h3 className="text-[11px] font-bold text-text-muted uppercase tracking-widest">Translation Language</h3>
@@ -167,7 +167,7 @@ export function SettingsPanel() {
                 </div>
               </section>
 
-              {/* ── Font Sizes ── */}
+              {}
               <section className="space-y-6 pt-2">
                 <div className="space-y-4">
                   <div className="flex items-center justify-between">
@@ -204,7 +204,7 @@ export function SettingsPanel() {
                 </div>
               </section>
 
-              {/* ── Visibility Toggles ── */}
+              {}
               <section className="space-y-3 pt-4 border-t border-border">
                 <ToggleRow
                   label="Show Translation"
@@ -222,7 +222,7 @@ export function SettingsPanel() {
 
           {settingsTab === "reading" && (
             <>
-              {/* ── Change Mushaf ── */}
+              {}
               <section>
                 <div className="flex items-center justify-between mb-4">
                   <h3 className="text-[11px] font-bold text-text-muted uppercase tracking-widest">Change Mushaf</h3>
@@ -267,7 +267,7 @@ export function SettingsPanel() {
                             : "border-border hover:border-border-light hover:bg-bg-hover shadow-sm"
                         )}
                       >
-                        {/* Radio */}
+                        {}
                         <div className={cn(
                           "w-4 h-4 rounded-full border-2 flex-shrink-0 flex items-center justify-center transition-all",
                           isActive ? "border-accent-green" : "border-text-muted"
@@ -275,7 +275,7 @@ export function SettingsPanel() {
                           {isActive && <div className="w-2 h-2 rounded-full bg-accent-green animate-in zoom-in-50" />}
                         </div>
 
-                        {/* Label */}
+                        {}
                         <span className={cn(
                           "text-xs font-semibold flex-1 text-left leading-tight",
                           isActive ? "text-text-primary" : "text-text-secondary group-hover:text-text-primary"
@@ -283,7 +283,7 @@ export function SettingsPanel() {
                           {style.label}
                         </span>
 
-                        {/* Image Preview */}
+                        {}
                         <div className="flex-shrink-0 w-16 h-10 rounded-lg overflow-hidden border border-border shadow-inner bg-bg-elevated">
                           <img 
                             src={style.image} 
@@ -297,7 +297,7 @@ export function SettingsPanel() {
                 </div>
               </section>
 
-              {/* ── Reading Options ── */}
+              {}
               <section className="space-y-4 pt-6 border-t border-border">
                 <h3 className="text-[11px] font-bold text-text-muted uppercase tracking-widest">Reading Options</h3>
                 <div className="space-y-3">

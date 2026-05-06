@@ -52,13 +52,13 @@ export function ShareModal({ isOpen, onClose, shareUrl, title }: ShareModalProps
 
   return (
     <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
-      {/* Backdrop */}
+      {}
       <div 
         className="absolute inset-0 bg-black/60 backdrop-blur-md animate-in fade-in duration-300"
         onClick={onClose}
       />
       
-      {/* Modal */}
+      {}
       <div 
         className="relative w-full max-w-sm rounded-3xl border shadow-2xl overflow-hidden animate-in zoom-in-95 fade-in duration-300"
         style={{
@@ -67,7 +67,7 @@ export function ShareModal({ isOpen, onClose, shareUrl, title }: ShareModalProps
           borderColor: "var(--border)",
         }}
       >
-        {/* Header */}
+        {}
         <div className="flex items-center justify-between px-6 py-4 border-b border-white/5">
           <h3 className="font-bold text-lg text-text-primary">Share Ayah</h3>
           <button 
@@ -81,7 +81,7 @@ export function ShareModal({ isOpen, onClose, shareUrl, title }: ShareModalProps
         <div className="p-6">
           <p className="text-sm text-text-muted mb-6">Share this beautiful verse with your friends and family.</p>
           
-          {/* Grid of icons */}
+          {}
           <div className="grid grid-cols-4 gap-4 mb-8">
             {shareOptions.map((opt) => (
               <a
@@ -108,7 +108,7 @@ export function ShareModal({ isOpen, onClose, shareUrl, title }: ShareModalProps
             ))}
           </div>
 
-          {/* Copy Link */}
+          {}
           <div 
             className="flex items-center gap-2 p-3 rounded-2xl bg-white/5 border border-white/10 group cursor-pointer"
             onClick={handleCopy}
@@ -139,7 +139,7 @@ export function ShareModal({ isOpen, onClose, shareUrl, title }: ShareModalProps
           </div>
         </div>
 
-        {/* Footer info */}
+        {}
         <div className="px-6 py-4 bg-white/5 text-center">
           <p className="text-[10px] text-text-disabled font-medium uppercase tracking-[0.2em]">Quran Guide • Divine Wisdom</p>
         </div>

@@ -9,7 +9,6 @@ import {
 import { useState, useMemo, useEffect, useRef } from "react";
 import { useSettingsStore } from "@/store";
 
-// Map for fetching translation by language code
 const TRANSLATION_MAP: Record<string, string> = {
   en: "en.sahih",
   bn: "bn.bengali",
@@ -27,7 +26,6 @@ interface MushafPageViewProps {
   rightPageNum: number;
 }
 
-// Group verses by surah within a page
 function groupBySurah(verses: PageVerse[]) {
   const groups: Map<number, { surahId: number; surahName: string; surahArabic: string; verses: PageVerse[] }> = new Map();
   for (const v of verses) {
@@ -39,18 +37,14 @@ function groupBySurah(verses: PageVerse[]) {
   return Array.from(groups.values());
 }
 
-// Convert to Arabic-Indic numerals
 function toArabicNum(n: number): string {
   return n.toString().replace(/\d/g, (d) => "٠١٢٣٤٥٦٧٨٩"[+d]);
 }
 
-// ─────────────────────────────────────────────────────────────
-// Surah Banner
-// ─────────────────────────────────────────────────────────────
 function SurahBanner({ name, arabic, id }: { name: string; arabic: string; id: number }) {
   return (
     <div className="relative flex items-center justify-center my-4">
-      {/* Decorative ornamental border */}
+      {}
       <div
         className="w-[90%] py-3 px-6 flex items-center justify-between rounded-sm"
         style={{
@@ -78,9 +72,6 @@ function SurahBanner({ name, arabic, id }: { name: string; arabic: string; id: n
   );
 }
 
-// ─────────────────────────────────────────────────────────────
-// Bismillah
-// ─────────────────────────────────────────────────────────────
 function Bismillah({ font }: { font: any }) {
   const fontFamilyMap: Record<string, string> = {
     kfgq: "'KFGQPC Uthmanic Script HAFS', serif",
@@ -106,9 +97,6 @@ function Bismillah({ font }: { font: any }) {
   );
 }
 
-// ─────────────────────────────────────────────────────────────
-// Quran Page Images
-// ─────────────────────────────────────────────────────────────
 const QURAN_PAGE_IMAGES = [
   "quran_page_01_Al_Fatihah.png",
   "quran_page_02_Al_Baqarah.png",
@@ -132,9 +120,6 @@ const QURAN_PAGE_IMAGES = [
   "quran_page_20_Al_Kawthar.png",
 ];
 
-// ─────────────────────────────────────────────────────────────
-// Mushaf Styles Definitions
-// ─────────────────────────────────────────────────────────────
 const MUSHAF_STYLES: Record<string, {
   paper: string;
   border: string;
@@ -179,9 +164,6 @@ const MUSHAF_STYLES: Record<string, {
   },
 };
 
-// ─────────────────────────────────────────────────────────────
-// Single Page View (Mockup Style with Real Data)
-// ─────────────────────────────────────────────────────────────
 function MushafPage({
   pageNum,
   verses,
@@ -197,8 +179,7 @@ function MushafPage({
 }) {
   const surahGroups = useMemo(() => groupBySurah(verses), [verses]);
   const style = MUSHAF_STYLES[styleId] || MUSHAF_STYLES.madani;
-  
-  // Get header info from first surah on page
+
   const mainSurah = surahGroups[0];
   const juzNum = verses[0]?.juz_number ?? 1;
 
@@ -218,19 +199,19 @@ function MushafPage({
           : "-5px 0 30px rgba(0,0,0,0.1), inset -10px 0 20px rgba(0,0,0,0.05)",
       }}
     >
-      {/* Paper Texture Overlay */}
+      {}
       <div className="absolute inset-0 opacity-[0.04] pointer-events-none mix-blend-multiply bg-[url('https://www.transparenttextures.com/patterns/paper-fibers.png')]" />
       
-      {/* Dynamic Ornamental Frame */}
+      {}
       <div 
         className="absolute inset-4 border-[1px] rounded-lg pointer-events-none z-10 transition-colors duration-500"
         style={{ borderColor: `${style.border}${Math.floor(style.frameOpacity * 255).toString(16).padStart(2, '0')}` }}
       />
 
-      {/* Page Content */}
+      {}
       <div className="flex-1 flex flex-col relative z-20 px-8 sm:px-12 py-10 overflow-y-auto custom-scrollbar">
         
-        {/* Page Header (Juz, Page, Surah) */}
+        {}
         <div className="flex items-center justify-between mb-8 border-b pb-2 transition-colors duration-500" style={{ borderColor: `${style.accent}33` }}>
           <div className="text-[10px] font-bold uppercase tracking-widest" style={{ color: style.border }}>
             Juz {juzNum}
@@ -243,11 +224,11 @@ function MushafPage({
           </div>
         </div>
 
-        {/* Verses Content */}
+        {}
         <div className="flex-1 text-center">
           {surahGroups.map((group, gIdx) => (
             <div key={group.surahId} className="mb-8">
-              {/* Show Surah Banner if it's the start of a surah on this page */}
+              {}
               {group.verses[0].verse_number === 1 && (
                 <>
                   <SurahBanner name={group.surahName} arabic={group.surahArabic} id={group.surahId} />
@@ -279,7 +260,7 @@ function MushafPage({
           ))}
         </div>
         
-        {/* Page Footer */}
+        {}
         <div className="mt-auto pt-6 text-center">
           <span className="text-[18px] font-bold" style={{ fontFamily: "'Amiri', serif", color: style.border }}>
             ـ {toArabicNum(pageNum)} ـ
@@ -287,7 +268,7 @@ function MushafPage({
         </div>
       </div>
 
-      {/* Binding Shadow */}
+      {}
       <div className={cn(
         "absolute top-0 bottom-0 w-12 pointer-events-none z-30 transition-opacity duration-500",
         isRight 
@@ -298,9 +279,6 @@ function MushafPage({
   );
 }
 
-// ─────────────────────────────────────────────────────────────
-// Main Component
-// ─────────────────────────────────────────────────────────────
 export function MushafPageView({
   currentPageNum,
   leftVerses,
@@ -327,7 +305,7 @@ export function MushafPageView({
       "flex flex-col min-h-full transition-all duration-300",
       isFullscreen ? "fixed inset-0 z-50 bg-[#1a1a1a]" : "bg-bg-primary/30"
     )}>
-      {/* ── Toolbar ── */}
+      {}
       <div className="flex items-center justify-between px-3 md:px-6 py-2 md:py-3 border-b border-border bg-bg-primary/80 backdrop-blur-md flex-shrink-0 shadow-sm z-20">
         <div className="flex items-center gap-2 md:gap-3 text-xs md:sm font-medium">
           <div className="hidden sm:flex items-center justify-center w-7 h-7 md:w-8 md:h-8 rounded-lg bg-accent-green/10 text-accent-green">
@@ -346,7 +324,7 @@ export function MushafPageView({
         </button>
       </div>
 
-      {/* ── Main Display Area ── */}
+      {}
       <div 
         className="flex-1 overflow-auto p-4 md:p-8 flex items-center justify-center"
         style={{ 
@@ -357,21 +335,21 @@ export function MushafPageView({
         <div className="w-full max-w-[1300px]">
           
           {isMobile ? (
-            /* Mobile: Single Page */
+            
             <div className="flex justify-center">
               <MushafPage pageNum={currentPageNum} verses={leftVerses} font={font} styleId={reading.mushafStyle} />
             </div>
           ) : (
-            /* Desktop: Double Spread */
+            
             <div
               className="relative flex justify-center rounded-2xl mx-auto overflow-hidden shadow-[0_50px_100px_-20px_rgba(0,0,0,0.5)]"
               style={{
                 padding: "8px",
                 gap: "2px",
-                background: "#2a2118", // Dark leather binding feel
+                background: "#2a2118", 
               }}
             >
-              {/* Central Spine Binding Overlay */}
+              {}
               <div
                 className="absolute top-0 bottom-0 left-1/2 w-[2px] -translate-x-1/2 z-40 bg-black/40 shadow-[0_0_10px_rgba(0,0,0,0.5)]"
               />
@@ -381,7 +359,7 @@ export function MushafPageView({
             </div>
           )}
 
-          {/* ── Navigation ── */}
+          {}
           <div className="flex items-center justify-center gap-4 md:gap-8 mt-10 pb-8">
             {prevPage !== null ? (
               <Link

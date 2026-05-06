@@ -26,7 +26,6 @@ export function AyahListClient({ initialVerses, surahId, surahName }: AyahListCl
   const [verses, setVerses] = useState<Verse[]>(initialVerses);
   const [loading, setLoading] = useState(false);
 
-  // Synchronize with backend data when it arrives
   useEffect(() => {
     if (backendVerses) {
       setVerses(backendVerses);
@@ -34,8 +33,7 @@ export function AyahListClient({ initialVerses, surahId, surahName }: AyahListCl
   }, [backendVerses]);
 
   useEffect(() => {
-    // Only fetch external translation if NOT English (assuming backend is English)
-    // Or if you want to allow switching. 
+
     if (font.translationLang === "en" || !TRANSLATION_MAP[font.translationLang]) {
       if (backendVerses) setVerses(backendVerses);
       else setVerses(initialVerses);
@@ -52,7 +50,7 @@ export function AyahListClient({ initialVerses, surahId, surahName }: AyahListCl
         
         if (data.data?.ayahs && isMounted) {
           const transAyahs = data.data.ayahs;
-          // Merge new translation text into our verses
+          
           const sourceVerses = backendVerses || initialVerses;
           const updatedVerses = sourceVerses.map((v, i) => ({
             ...v,

@@ -4,8 +4,8 @@ import { Play, Pause, Loader2 } from "lucide-react";
 import { cn } from "@/utils";
 
 interface AudioButtonProps {
-  verseKey: string;   // "1:1"
-  verseId: number;    // global verse id
+  verseKey: string;   
+  verseId: number;    
   surahId: number;
   className?: string;
 }
@@ -20,16 +20,16 @@ export function AudioButton({ verseKey, verseId, surahId, className }: AudioButt
 
   const handleClick = () => {
     if (isPlaying) {
-      // Pause this ayah
+      
       setPaused();
       return;
     }
     if (isPaused) {
-      // Resume — set back to playing state (AudioEngine will resume)
+      
       useAudioStore.setState({ playbackState: "playing" });
       return;
     }
-    // Stop any current and play this ayah
+    
     startPlaying(verseId, surahId, verseKey);
   };
 
